@@ -13,6 +13,7 @@ import com.example.raportybhp.Camera.CameraState
 import com.example.raportybhp.Camera.FlashState
 import com.example.raportybhp.Camera.FotoapparatState
 import com.example.raportybhp.Camera.TakePhoto
+import com.example.raportybhp.Report.ReportPDF
 import io.fotoapparat.Fotoapparat
 import io.fotoapparat.configuration.CameraConfiguration
 import io.fotoapparat.log.logcat
@@ -28,6 +29,7 @@ import java.io.File
 class MainActivity : AppCompatActivity() {
 
     lateinit var takePhotoBtn : Button
+    lateinit var addReport : Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,10 +40,22 @@ class MainActivity : AppCompatActivity() {
         takePhotoBtn.setOnClickListener(){
             takePhoto()
         }
+
+        addReport = findViewById(R.id.AddReport)
+
+        addReport.setOnClickListener(){
+            addReport()
+        }
     }
 
     private fun takePhoto() {
         var intent = Intent(this, TakePhoto::class.java)
+
+        startActivity(intent)
+    }
+
+    private fun addReport() {
+        var intent = Intent(this, ReportPDF::class.java)
 
         startActivity(intent)
     }

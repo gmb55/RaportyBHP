@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -11,6 +12,32 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="51dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                tools:srcCompat="@tools:sample/avatars[2]" />
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal"
+                android:layout_weight="1"
+                android:text="LOGO"
+                android:gravity="center_vertical"
+                android:textAlignment="center"
+                android:textColor="#CDDC39"
+                android:textSize="36sp" />
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -31,15 +58,15 @@
                 />
 
             <Button
-                android:id="@+id/button3"
+                android:id="@+id/AddReport"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_margin="12sp"
                 android:layout_weight="1"
                 android:background="#383a56"
-                android:text="Button"
+                android:text="Add report"
                 android:textColor="#ede68a"
-                android:textSize="20sp"
-                android:layout_margin="12sp"/>
+                android:textSize="20sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -52,23 +79,23 @@
                 android:id="@+id/button4"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_margin="12sp"
                 android:layout_weight="1"
                 android:background="#383a56"
-                android:text="Button"
+                android:text="Quick report"
                 android:textColor="#ede68a"
-                android:textSize="20sp"
-                android:layout_margin="12sp"/>
+                android:textSize="20sp" />
 
             <Button
                 android:id="@+id/button5"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_margin="12sp"
                 android:layout_weight="1"
                 android:background="#383a56"
-                android:text="Button"
+                android:text="Add project"
                 android:textColor="#ede68a"
-                android:textSize="20sp"
-                android:layout_margin="12sp"/>
+                android:textSize="20sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -81,53 +108,24 @@
                 android:id="@+id/button6"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_margin="12sp"
                 android:layout_weight="1"
                 android:background="#383a56"
-                android:text="Button"
+                android:text="See previous"
                 android:textColor="#ede68a"
-                android:textSize="20sp"
-                android:layout_margin="12sp"/>
+                android:textSize="20sp" />
 
             <Button
                 android:id="@+id/button7"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_margin="12sp"
                 android:layout_weight="1"
                 android:background="#383a56"
-                android:text="Button"
+                android:text="Add member"
                 android:textColor="#ede68a"
-                android:textSize="20sp"
-                android:layout_margin="12sp"/>
+                android:textSize="20sp" />
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:layout_weight="1">
-
-            <Button
-                android:id="@+id/button8"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="#383a56"
-                android:text="Button"
-                android:textColor="#ede68a"
-                android:textSize="20sp"
-                android:layout_margin="12sp"/>
-
-            <Button
-                android:id="@+id/button9"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="#383a56"
-                android:text="Button"
-                android:textColor="#ede68a"
-                android:textSize="20sp"
-                android:layout_margin="12sp"/>
-
-        </LinearLayout>
     </LinearLayout>
 </RelativeLayout>
