@@ -25,6 +25,8 @@
         </activity>
         <activity android:name=".Camera.TakePhoto"></activity>
         <activity android:name=".Report.ReportPDF"></activity>
+        <activity android:name=".addProject.addProject"></activity>
+        <activity android:name=".projects.Projects"></activity>
     </application>
 
 </manifest>

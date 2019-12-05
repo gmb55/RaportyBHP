@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">RaportyBHP</string>
+    <string name="generalny_wykonawca">Generalny Wykonawca</string>
+    <string name="nazwa_firmy_hint">Podaj nazwę firmy…</string>
+    <string name="inwestor">Inwestor</string>
+    <string name="project_TAG">TAG zadania</string>
+    <string name="project_TAG_hint">Podaj TAG zadania…</string>
+    <string name="project_name">Nazwa zadania</string>
+    <string name="project_name_hint">Podaj nazwę zadania…</string>
 </resources>

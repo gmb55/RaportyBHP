@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#2f3032">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/GW_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/generalny_wykonawca"
+            android:textColor="#CDDC39" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/editTextGW"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:autofillHints="Company name"
+                android:ems="10"
+                android:hint="@string/nazwa_firmy_hint"
+                android:inputType="textPersonName"
+                android:textColor="#CDDC39"
+                android:textColorHint="#CDDC39"
+                android:textSize="24sp" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="39dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/inwestor"
+            android:textColor="#CDDC39" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/editTextIN"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:autofillHints="Inverstor name"
+                android:ems="10"
+                android:hint="@string/nazwa_firmy_hint"
+                android:inputType="textPersonName"
+                android:textColor="#CDDC39"
+                android:textColorHint="#CDDC39"
+                android:textSize="24sp" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="6"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/project_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/project_TAG"
+            android:textColor="#CDDC39" />
+
+        <EditText
+            android:id="@+id/editTextTAG"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:autofillHints="Company name"
+            android:ems="10"
+            android:hint="@string/project_TAG_hint"
+            android:inputType="textPersonName"
+            android:textColor="#CDDC39"
+            android:textColorHint="#CDDC39"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/Project_name"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:gravity="bottom"
+            android:text="@string/project_name"
+            android:textColor="#CDDC39" />
+
+        <EditText
+            android:id="@+id/editTextName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:autofillHints="Company name"
+            android:ems="10"
+            android:hint="@string/project_name_hint"
+            android:inputType="textPersonName"
+            android:textColor="#CDDC39"
+            android:textColorHint="#CDDC39"
+            android:textSize="24sp" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center"
+            android:layout_marginTop="60dp"
+            />
+
+    </LinearLayout>
+
+</LinearLayout>

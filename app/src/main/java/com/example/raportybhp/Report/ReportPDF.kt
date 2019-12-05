@@ -11,8 +11,12 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.raportybhp.R
 import com.itextpdf.text.Document
+import com.itextpdf.text.PageSize
 import com.itextpdf.text.Paragraph
+import com.itextpdf.text.Phrase
 import com.itextpdf.text.pdf.PdfWriter
+import com.itextpdf.text.pdf.PdfPTable
+import com.itextpdf.text.pdf.PdfPCell
 import java.io.FileOutputStream
 import java.text.SimpleDateFormat
 import java.util.*
@@ -28,8 +32,8 @@ class ReportPDF : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.report)
 
-        saveBTN.findViewById<Button>(R.id.SavePDF)
-        textPDF.findViewById<EditText>(R.id.TextPDF)
+        saveBTN = findViewById(R.id.SavePDF)
+        textPDF = findViewById(R.id.TextPDF)
 
         saveBTN.setOnClickListener {
             if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M) {
@@ -49,7 +53,7 @@ class ReportPDF : AppCompatActivity() {
 
     private fun savePDF() {
 
-        val mDoc = Document ()
+        val mDoc = Document (PageSize.A4.rotate())
 
         val mFileName = SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(System.currentTimeMillis())
 
@@ -62,7 +66,20 @@ class ReportPDF : AppCompatActivity() {
             val mText = textPDF.text.toString()
 
             mDoc.addAuthor("Ja")
+
+            var heading = PdfPTable(4)
+            var cell1 = PdfPCell(Phrase("cośtam"))
+
+            for (x in 0..5) {
+                if (x <= 4) {
+                    heading.addCell(cell1)
+                } else {
+                    heading.addCell("")
+                }
+                }
+
             mDoc.add(Paragraph(mText))
+            mDoc.add(heading)
 
             mDoc.close()
 

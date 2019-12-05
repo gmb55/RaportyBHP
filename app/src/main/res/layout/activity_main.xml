@@ -87,13 +87,13 @@
                 android:textSize="20sp" />
 
             <Button
-                android:id="@+id/button5"
+                android:id="@+id/ProjectsBTN"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="12sp"
                 android:layout_weight="1"
                 android:background="#383a56"
-                android:text="Add project"
+                android:text="Projects"
                 android:textColor="#ede68a"
                 android:textSize="20sp" />
         </LinearLayout>
