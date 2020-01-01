@@ -6,7 +6,8 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.raportybhp.R
-import com.google.firebase.database.FirebaseDatabase
+import com.example.raportybhp.projects.Projects
+import com.google.firebase.database.*
 
 class addProject : AppCompatActivity(){
 
@@ -15,21 +16,29 @@ class addProject : AppCompatActivity(){
     lateinit var editTextTAG: EditText
     lateinit var editTextName: EditText
 
+    lateinit var ref : DatabaseReference
+    lateinit var projectList: MutableList<Projects>
+
     lateinit var buttonSave: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.add_project)
 
+        ref = FirebaseDatabase.getInstance().getReference("projects")
+
+        projectList = mutableListOf()
+
         editTextGW = findViewById(R.id.editTextGW)
         editTextIN = findViewById(R.id.editTextIN)
         editTextTAG = findViewById(R.id.editTextTAG)
         editTextName = findViewById(R.id.editTextName)
 
+        buttonSave = findViewById(R.id.saveBTN)
+
         buttonSave.setOnClickListener{
             saveProject()
         }
-
     }
 
     private fun saveProject() {
@@ -43,13 +52,14 @@ class addProject : AppCompatActivity(){
             return
         }
 
-        val ref = FirebaseDatabase.getInstance().getReference("projects")
         val heroID = ref.push().key
 
         val hero = projectsDTB(heroID, nameGW, nameIN, TAG, name )
 
         ref.child(heroID.toString()).setValue(hero).addOnCompleteListener {
-            Toast.makeText(applicationContext, "Hero saved successfully", Toast.LENGTH_SHORT).show()
+            Toast.makeText(applicationContext, "Project add successfully", Toast.LENGTH_SHORT).show()
         }
     }
+
+
 }

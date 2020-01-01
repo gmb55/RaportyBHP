@@ -10,13 +10,13 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.example.raportybhp.MainActivity
 import com.example.raportybhp.R
+import com.example.raportybhp.fileName
 import io.fotoapparat.Fotoapparat
 import io.fotoapparat.configuration.CameraConfiguration
 import io.fotoapparat.log.logcat
 import io.fotoapparat.log.loggers
 import io.fotoapparat.parameter.ScaleType
 import io.fotoapparat.selector.back
-import io.fotoapparat.selector.front
 import io.fotoapparat.selector.off
 import io.fotoapparat.selector.torch
 import io.fotoapparat.view.CameraView
@@ -26,7 +26,7 @@ import java.io.File
 class TakePhoto : AppCompatActivity(){
 
     var fotoapparat: Fotoapparat? = null
-    val filename = "test.png"
+    val filename = fileName().getName("yyyyMMdd_HHmmss") + ".png"
     val sd = Environment.getExternalStorageDirectory()
     val dest = File(sd, filename)
     var fotoapparatState : FotoapparatState? = null
@@ -48,14 +48,6 @@ class TakePhoto : AppCompatActivity(){
 
         fab_camera.setOnClickListener {
             takePhoto()
-        }
-
-        fab_switch_camera.setOnClickListener {
-            switchCamera()
-        }
-
-        fab_flash.setOnClickListener {
-            changeFlashState()
         }
     }
 
@@ -87,15 +79,6 @@ class TakePhoto : AppCompatActivity(){
         else flashState = FlashState.TORCH
     }
 
-    private fun switchCamera() {
-        fotoapparat?.switchTo(
-            lensPosition =  if (cameraStatus == CameraState.BACK) front() else back(),
-            cameraConfiguration = CameraConfiguration()
-        )
-
-        if(cameraStatus == CameraState.BACK) cameraStatus = CameraState.FRONT
-        else cameraStatus = CameraState.BACK
-    }
 
     private fun takePhoto() {
         if (hasNoPermissions()) {
@@ -104,8 +87,12 @@ class TakePhoto : AppCompatActivity(){
             fotoapparat
                 ?.takePicture()
                 ?.saveToFile(dest)
+                pctDes()
+
         }
     }
+
+
 
     override fun onStart() {
         super.onStart()
@@ -141,6 +128,13 @@ class TakePhoto : AppCompatActivity(){
             startActivity(intent)
             finish()
         }
+    }
+
+    private fun pctDes() {
+        var intent = Intent(this, pictureDescription::class.java)
+        var newFile = filename
+        intent.putExtra("pictureDest",newFile)
+        startActivity(intent)
     }
 
 

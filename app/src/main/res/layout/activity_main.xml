@@ -105,13 +105,13 @@
             android:layout_weight="1">
 
             <Button
-                android:id="@+id/button6"
+                android:id="@+id/TestBTN"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="12sp"
                 android:layout_weight="1"
                 android:background="#383a56"
-                android:text="See previous"
+                android:text="TEST"
                 android:textColor="#ede68a"
                 android:textSize="20sp" />
 

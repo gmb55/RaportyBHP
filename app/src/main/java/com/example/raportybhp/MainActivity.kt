@@ -7,6 +7,7 @@ import android.widget.Button
 import com.example.raportybhp.Camera.TakePhoto
 import com.example.raportybhp.Report.ReportPDF
 import com.example.raportybhp.projects.Projects
+import com.example.raportybhp.test.Test
 
 
 class MainActivity : AppCompatActivity() {
@@ -14,6 +15,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var takePhotoBtn : Button
     lateinit var addReport : Button
     lateinit var addProjectButton : Button
+    lateinit var testButton : Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,6 +38,12 @@ class MainActivity : AppCompatActivity() {
         addProjectButton.setOnClickListener(){
             addProjectFNT()
         }
+
+        testButton = findViewById(R.id.TestBTN)
+
+        testButton.setOnClickListener(){
+            testFNT()
+        }
     }
 
     private fun takePhoto() {
@@ -52,6 +60,12 @@ class MainActivity : AppCompatActivity() {
 
     private fun addProjectFNT() {
         var intent = Intent(this, Projects::class.java)
+
+        startActivity(intent)
+    }
+
+    private fun testFNT() {
+        var intent = Intent(this, Test::class.java)
 
         startActivity(intent)
     }

@@ -3,6 +3,7 @@
     package="com.example.raportybhp">
 
     <uses-feature android:name="android.hardware.camera" android:required="true" />
+    <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 
@@ -27,6 +28,8 @@
         <activity android:name=".Report.ReportPDF"></activity>
         <activity android:name=".addProject.addProject"></activity>
         <activity android:name=".projects.Projects"></activity>
+        <activity android:name=".test.Test"></activity>
+        <activity android:name=".Camera.pictureDescription"></activity>
     </application>
 
 </manifest>
