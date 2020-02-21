@@ -25,6 +25,7 @@ import com.itextpdf.text.*
 import com.itextpdf.text.pdf.*
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.picture_description.*
+import java.io.File
 import java.io.FileOutputStream
 import java.text.SimpleDateFormat
 import java.util.*
@@ -86,7 +87,6 @@ class ReportPDF : AppCompatActivity() {
 
             val mText = textPDF.text.toString()
 
-            mDoc.addAuthor("Ja")
 
             // SET DATE
 
@@ -100,13 +100,19 @@ class ReportPDF : AppCompatActivity() {
             var testAssetsList = assets.list("")
 
             // CREATE IMG INSTANCE
+            val filename = "20200103_205607.png"
+            val sd = Environment.getExternalStorageDirectory().toString() + "/" + filename
 
-            var ims = assets.open("cp_logo.jpg")
-           var bmp = BitmapFactory.decodeStream(ims)
+            val options = BitmapFactory.Options()
+            options.inPreferredConfig = Bitmap.Config.ARGB_8888
+            var bmp = BitmapFactory.decodeFile((sd),options)
+
             val stream = ByteArrayOutputStream1()
-           bmp.compress(Bitmap.CompressFormat.PNG, 100, stream)
-           var img = Image.getInstance(stream.toByteArray())
+            bmp.compress(Bitmap.CompressFormat.PNG,100,stream)
+            var image = Image.getInstance(stream.toByteArray())
 
+
+            val dest = File(sd, filename)
 
             // SET DATE TO CELL
 
@@ -123,7 +129,7 @@ class ReportPDF : AppCompatActivity() {
             heading.addCell(cell4Date)
 
             mDoc.add(Paragraph(mText, font))
-            mDoc.add(img)
+            mDoc.add(image)
             mDoc.add(heading)
 
             mDoc.close()
