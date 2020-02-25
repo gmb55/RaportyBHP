@@ -16,8 +16,6 @@ abstract class pictureDescription : AppCompatActivity() {
 //    private lateinit var mStorageRef : StorageReference
 
 
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.picture_description)
