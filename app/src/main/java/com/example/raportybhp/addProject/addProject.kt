@@ -52,11 +52,11 @@ class addProject : AppCompatActivity(){
             return
         }
 
-        val heroID = ref.push().key
+        val ID = ref.push().key
 
-        val hero = projectsDTB(heroID, nameGW, nameIN, TAG, name )
+        val project = projectsDTB(ID, nameGW, nameIN, TAG, name )
 
-        ref.child(heroID.toString()).setValue(hero).addOnCompleteListener {
+        ref.child(ID.toString()).setValue(project).addOnCompleteListener {
             Toast.makeText(applicationContext, "Project add successfully", Toast.LENGTH_SHORT).show()
         }
     }

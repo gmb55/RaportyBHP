@@ -27,6 +27,7 @@ import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.picture_description.*
 import java.io.File
 import java.io.FileOutputStream
+import java.net.URL
 import java.text.SimpleDateFormat
 import java.util.*
 import java.io.ByteArrayOutputStream as ByteArrayOutputStream1
@@ -100,19 +101,10 @@ class ReportPDF : AppCompatActivity() {
             var testAssetsList = assets.list("")
 
             // CREATE IMG INSTANCE
-            val filename = "20200103_205607.png"
-            val sd = Environment.getExternalStorageDirectory().toString() + "/" + filename
 
-            val options = BitmapFactory.Options()
-            options.inPreferredConfig = Bitmap.Config.ARGB_8888
-            var bmp = BitmapFactory.decodeFile((sd),options)
-
-            val stream = ByteArrayOutputStream1()
-            bmp.compress(Bitmap.CompressFormat.PNG,100,stream)
-            var image = Image.getInstance(stream.toByteArray())
+        //    var image = Image.getInstance(URL("https://firebasestorage.googleapis.com/v0/b/raportybhp.appspot.com/o/Images%2F1582998450880.png?alt=media&token=443bfb4b-13bb-4b02-be4a-18a89f25a1b0.png"))
 
 
-            val dest = File(sd, filename)
 
             // SET DATE TO CELL
 
@@ -129,7 +121,7 @@ class ReportPDF : AppCompatActivity() {
             heading.addCell(cell4Date)
 
             mDoc.add(Paragraph(mText, font))
-            mDoc.add(image)
+      //      mDoc.add(image)
             mDoc.add(heading)
 
             mDoc.close()

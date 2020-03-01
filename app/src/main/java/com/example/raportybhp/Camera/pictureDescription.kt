@@ -8,8 +8,12 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.raportybhp.FireBase.EventDTB
 import com.example.raportybhp.R
+import com.example.raportybhp.addProject.projectsDTB
 import com.google.android.gms.tasks.Task
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.squareup.picasso.Picasso
@@ -22,12 +26,15 @@ class pictureDescription : AppCompatActivity() {
     lateinit var imageToPick: ImageView
     lateinit var picDES : EditText
     lateinit var mStorageRef : StorageReference
+    lateinit var ref : DatabaseReference
+    lateinit var downloadUrl : Task<Uri>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.picture_description)
 
         mStorageRef = FirebaseStorage.getInstance().getReference("Images")
+        ref = FirebaseDatabase.getInstance().getReference("events")
 
         imageToPick = findViewById(R.id.imageToPick)
         dspBTN = findViewById(R.id.dspBTN)
@@ -36,27 +43,45 @@ class pictureDescription : AppCompatActivity() {
 
         dspBTN.setOnClickListener() {
             display()
-            imageUploader()
+
         }
 
         pickBTN.setOnClickListener() {
-            next()
+            imageUploader()
         }
     }
 
 
 
     private fun imageUploader() {
-        var ref = mStorageRef.child(System.currentTimeMillis().toString() + "." + "png")
+        var storageRef = mStorageRef.child(System.currentTimeMillis().toString() + "." + "png")
 
         var filePath = getFile()
 
         val file = Uri.fromFile(filePath)
 
-        ref.putFile(file)
+        var text = picDES.text.toString()
+        val ID = ref.push().key
+
+
+        storageRef.putFile(file)
             .addOnSuccessListener { taskSnapshot ->
-              //   Get a URL to the uploaded content
-                val downloadUrl : Task<Uri> = taskSnapshot.storage.downloadUrl
+                //   Get a URL to the uploaded content
+                downloadUrl = taskSnapshot.storage.downloadUrl.addOnSuccessListener {
+                    var uri = it.toString()
+
+                    val event = EventDTB(ID, text, uri)
+
+
+
+
+                    ref.child(ID.toString()).setValue(event).addOnCompleteListener {
+                        Toast.makeText(applicationContext, "Event add successfully", Toast.LENGTH_SHORT)
+                            .show()
+                }
+
+
+                }
 
             Toast.makeText(this, "Image Uploaded Successfully", Toast.LENGTH_SHORT ).show()
                 deleteFile()
@@ -65,10 +90,7 @@ class pictureDescription : AppCompatActivity() {
                 // Handle unsuccessful uploads
                 // ...
             }
-    }
 
-    private fun next() {
-        var text = picDES.text.toString()
     }
 
     private fun getFile() : File {
