@@ -28,6 +28,7 @@ import kotlinx.android.synthetic.main.picture_description.*
 import java.io.File
 import java.io.FileOutputStream
 import java.net.URL
+import java.nio.file.Files
 import java.text.SimpleDateFormat
 import java.util.*
 import java.io.ByteArrayOutputStream as ByteArrayOutputStream1
@@ -102,8 +103,9 @@ class ReportPDF : AppCompatActivity() {
 
             // CREATE IMG INSTANCE
 
-        //    var image = Image.getInstance(URL("https://firebasestorage.googleapis.com/v0/b/raportybhp.appspot.com/o/Images%2F1582998450880.png?alt=media&token=443bfb4b-13bb-4b02-be4a-18a89f25a1b0.png"))
+            var encoded = getFile().readBytes()
 
+            var image = Image.getInstance(encoded)
 
 
             // SET DATE TO CELL
@@ -121,7 +123,7 @@ class ReportPDF : AppCompatActivity() {
             heading.addCell(cell4Date)
 
             mDoc.add(Paragraph(mText, font))
-      //      mDoc.add(image)
+           mDoc.add(image)
             mDoc.add(heading)
 
             mDoc.close()
@@ -131,6 +133,16 @@ class ReportPDF : AppCompatActivity() {
         } catch (e: Exception) {
             Toast.makeText(this, e.message, Toast.LENGTH_SHORT).show()
         }
+    }
+
+    private fun getFile() : File {
+        val extra = intent.getStringExtra("pictureDest")
+     //   var extra = "20200301_233135.png"
+
+        val sd = Environment.getExternalStorageDirectory()
+        val dest = File(sd, extra)
+
+        return dest
     }
 
 

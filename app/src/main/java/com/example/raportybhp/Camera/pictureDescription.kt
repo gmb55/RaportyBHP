@@ -1,5 +1,6 @@
 package com.example.raportybhp.Camera
 
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
@@ -10,6 +11,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.raportybhp.FireBase.EventDTB
 import com.example.raportybhp.R
+import com.example.raportybhp.Report.ReportPDF
 import com.example.raportybhp.addProject.projectsDTB
 import com.google.android.gms.tasks.Task
 import com.google.firebase.database.DatabaseReference
@@ -84,13 +86,23 @@ class pictureDescription : AppCompatActivity() {
                 }
 
             Toast.makeText(this, "Image Uploaded Successfully", Toast.LENGTH_SHORT ).show()
-                deleteFile()
+
+             //   deleteFile()
+                pctDes()
+
             }
             .addOnFailureListener {
                 // Handle unsuccessful uploads
                 // ...
             }
 
+    }
+
+    private fun pctDes() {
+        var intent2 = Intent(this, ReportPDF::class.java)
+        var newFile = intent.getStringExtra("pictureDest")
+        intent2.putExtra("pictureDest",newFile)
+        startActivity(intent2)
     }
 
     private fun getFile() : File {
