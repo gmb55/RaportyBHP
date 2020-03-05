@@ -117,19 +117,18 @@ class ReportPDF : AppCompatActivity() {
 
             var cell2Title = PdfPCell(Phrase(title, font))
 
-            heading.addCell("")
+            heading.addCell(mText)
             heading.addCell(cell2Title)
-            heading.addCell("")
+            heading.addCell(image)
             heading.addCell(cell4Date)
 
-            mDoc.add(Paragraph(mText, font))
-           mDoc.add(image)
             mDoc.add(heading)
 
             mDoc.close()
 
             Toast.makeText(this, "$mFileName.pdf\nis saved to\n$mFilePath", Toast.LENGTH_SHORT)
                 .show()
+            getFile().delete()
         } catch (e: Exception) {
             Toast.makeText(this, e.message, Toast.LENGTH_SHORT).show()
         }
