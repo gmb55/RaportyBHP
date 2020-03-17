@@ -21,6 +21,7 @@ import androidx.core.graphics.drawable.toBitmap
 import com.example.raportybhp.R
 import com.example.raportybhp.fileName
 import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import com.itextpdf.text.*
 import com.itextpdf.text.pdf.*
 import com.squareup.picasso.Picasso
@@ -42,12 +43,15 @@ class ReportPDF : AppCompatActivity() {
     lateinit var imgView: ImageView
 
     lateinit var ref: DatabaseReference
+    lateinit var  eventRef : DatabaseReference
 
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.report)
+
+        ref = FirebaseDatabase.getInstance().getReference("events")
 
         saveBTN = findViewById(R.id.SavePDF)
         textPDF = findViewById(R.id.TextPDF)

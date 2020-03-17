@@ -130,10 +130,17 @@ class TakePhoto : AppCompatActivity(){
         }
     }
 
+    private fun getKey() : String {
+        val key = intent.getStringExtra("key")
+
+        return  key
+    }
+
     private fun pctDes() {
         var intent = Intent(this, pictureDescription::class.java)
         var newFile = filename
         intent.putExtra("pictureDest",newFile)
+        intent.putExtra("key", getKey())
         startActivity(intent)
     }
 

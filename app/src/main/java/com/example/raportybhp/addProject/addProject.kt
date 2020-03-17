@@ -1,11 +1,14 @@
 package com.example.raportybhp.addProject
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.raportybhp.Camera.TakePhoto
 import com.example.raportybhp.R
+import com.example.raportybhp.keyKeeper
 import com.example.raportybhp.projects.Projects
 import com.google.firebase.database.*
 
@@ -21,9 +24,13 @@ class addProject : AppCompatActivity(){
 
     lateinit var buttonSave: Button
 
+    lateinit var keyValue: keyKeeper
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.add_project)
+
+
 
         ref = FirebaseDatabase.getInstance().getReference("projects")
 
@@ -58,7 +65,17 @@ class addProject : AppCompatActivity(){
 
         ref.child(ID.toString()).setValue(project).addOnCompleteListener {
             Toast.makeText(applicationContext, "Project add successfully", Toast.LENGTH_SHORT).show()
+            takePhoto()
         }
+
+       keyValue = keyKeeper(ID.toString())
+    }
+
+    private fun takePhoto() {
+        var intent = Intent(this, TakePhoto::class.java)
+        var key = keyValue.getKey()
+        intent.putExtra("key",key)
+        startActivity(intent)
     }
 
 

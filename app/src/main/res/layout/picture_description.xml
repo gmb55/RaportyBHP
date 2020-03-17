@@ -17,6 +17,7 @@
         android:layout_alignParentEnd="false"
         android:background="#2f3032"
         android:foregroundGravity="center"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"

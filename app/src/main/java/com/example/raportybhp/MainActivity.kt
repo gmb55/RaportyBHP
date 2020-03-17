@@ -6,6 +6,7 @@ import android.content.Intent
 import android.widget.Button
 import com.example.raportybhp.Camera.TakePhoto
 import com.example.raportybhp.Report.ReportPDF
+import com.example.raportybhp.addProject.addProject
 import com.example.raportybhp.projects.Projects
 import com.example.raportybhp.test.Test
 
@@ -59,7 +60,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun addProjectFNT() {
-        var intent = Intent(this, Projects::class.java)
+        var intent = Intent(this, addProject::class.java)
 
         startActivity(intent)
     }

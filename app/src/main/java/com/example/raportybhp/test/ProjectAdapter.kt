@@ -19,10 +19,12 @@ class ProjectAdapter(val mCtx: Context, val layoutResID: Int, val projectList: L
         val layoutInflater = LayoutInflater.from(mCtx)
         val view = layoutInflater.inflate(layoutResID, null)
         val textViewName = view.findViewById<TextView>(R.id.tvListName)
+        val textTAGname = view.findViewById<TextView>(R.id.tvTAGname)
 
         val project = projectList[position]
 
         textViewName.text = project.nameGW
+        textTAGname.text = project.name
 
         return view
     }

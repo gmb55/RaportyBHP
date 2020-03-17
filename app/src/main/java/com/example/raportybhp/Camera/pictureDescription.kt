@@ -2,8 +2,10 @@ package com.example.raportybhp.Camera
 
 import android.content.Intent
 import android.net.Uri
+import android.opengl.Visibility
 import android.os.Bundle
 import android.os.Environment
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
@@ -14,8 +16,7 @@ import com.example.raportybhp.R
 import com.example.raportybhp.Report.ReportPDF
 import com.example.raportybhp.addProject.projectsDTB
 import com.google.android.gms.tasks.Task
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.*
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.squareup.picasso.Picasso
@@ -51,6 +52,19 @@ class pictureDescription : AppCompatActivity() {
         pickBTN.setOnClickListener() {
             imageUploader()
         }
+
+        var test = ref.child("-M1NCJ9_EEomksRYSGn1").addValueEventListener(object:
+            ValueEventListener {
+            override fun onCancelled(p0: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+            override fun onDataChange(p0: DataSnapshot) {
+                var des = p0.getValue(EventDTB::class.java)?.description
+                des
+            }
+
+        })
     }
 
 
@@ -73,8 +87,6 @@ class pictureDescription : AppCompatActivity() {
                     var uri = it.toString()
 
                     val event = EventDTB(ID, text, uri)
-
-
 
 
                     ref.child(ID.toString()).setValue(event).addOnCompleteListener {
@@ -102,7 +114,14 @@ class pictureDescription : AppCompatActivity() {
         var intent2 = Intent(this, ReportPDF::class.java)
         var newFile = intent.getStringExtra("pictureDest")
         intent2.putExtra("pictureDest",newFile)
+        intent2.putExtra("key",getKey())
         startActivity(intent2)
+    }
+
+    private fun getKey() : String {
+        val key = intent.getStringExtra("key")
+
+        return  key
     }
 
     private fun getFile() : File {
@@ -128,6 +147,8 @@ class pictureDescription : AppCompatActivity() {
         var file = getFile()
 
         Picasso.get().load(file).into(imageToPick)
+        imageToPick.visibility = View.VISIBLE
+        dspBTN.visibility = View.GONE
     }
 
 }
