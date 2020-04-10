@@ -130,11 +130,8 @@ class TakePhoto : AppCompatActivity(){
         }
     }
 
-    private fun getKey() : String {
-        val key = intent.getStringExtra("key")
+    private fun getKey() = intent.getStringExtra("key") ?: "-LvSAZWUd-1otdKgBWgF"
 
-        return  key
-    }
 
     private fun pctDes() {
         var intent = Intent(this, pictureDescription::class.java)

@@ -40,6 +40,7 @@ class Test : AppCompatActivity(){
                         val project = p.getValue(projectsDTB::class.java)
 
                         projectsList.add(project!!)
+
                     }
 
                     val adapter = ProjectAdapter(applicationContext, R.layout.projects_list, projectsList)

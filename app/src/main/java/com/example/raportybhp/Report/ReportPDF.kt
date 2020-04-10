@@ -19,9 +19,10 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.graphics.drawable.toBitmap
 import com.example.raportybhp.R
+import com.example.raportybhp.addProject.projectsDTB
 import com.example.raportybhp.fileName
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
+import com.example.raportybhp.test.ProjectAdapter
+import com.google.firebase.database.*
 import com.itextpdf.text.*
 import com.itextpdf.text.pdf.*
 import com.squareup.picasso.Picasso
@@ -45,8 +46,6 @@ class ReportPDF : AppCompatActivity() {
     lateinit var ref: DatabaseReference
     lateinit var  eventRef : DatabaseReference
 
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.report)
@@ -54,6 +53,7 @@ class ReportPDF : AppCompatActivity() {
         ref = FirebaseDatabase.getInstance().getReference("events")
 
         saveBTN = findViewById(R.id.SavePDF)
+        var project = getProject("-LvSAZWUd-1otdKgBWgF")
         textPDF = findViewById(R.id.TextPDF)
 
         saveBTN.setOnClickListener {
@@ -69,7 +69,6 @@ class ReportPDF : AppCompatActivity() {
             }
         }
     }
-
 
     private fun savePDF() {
 
@@ -92,7 +91,10 @@ class ReportPDF : AppCompatActivity() {
             // GET TEXT FROM EDITTEXT
 
             val mText = textPDF.text.toString()
+            var cell3mText = PdfPCell(Phrase(mText, font))
 
+            cell3mText.horizontalAlignment = 1
+            cell3mText.verticalAlignment = 5
 
             // SET DATE
 
@@ -102,7 +104,6 @@ class ReportPDF : AppCompatActivity() {
             val numberHeadingColumns = 4
             var heading = PdfPTable(numberHeadingColumns)
 
-
             var testAssetsList = assets.list("")
 
             // CREATE IMG INSTANCE
@@ -111,18 +112,25 @@ class ReportPDF : AppCompatActivity() {
 
             var image = Image.getInstance(encoded)
 
+            var project = getProject("-LvSAZWUd-1otdKgBWgF")
 
             // SET DATE TO CELL
 
             var cell4Date = PdfPCell(Phrase(date))
+            cell4Date.horizontalAlignment = 1
+            cell4Date.verticalAlignment = 5
+
 
             val title =
-                "Budowa międzysystemowego gazociągu stanowiącego połączenie systemów przesyłowych Rzeczypospolitej Polskiej i Republiki Słowackiej - węzeł rozdzielczo-pomiarowy Strachocina"
+                "1"
 
             var cell2Title = PdfPCell(Phrase(title, font))
 
-            heading.addCell(mText)
+            cell2Title.horizontalAlignment = 1
+            cell2Title.verticalAlignment = 5
+
             heading.addCell(cell2Title)
+            heading.addCell(cell3mText)
             heading.addCell(image)
             heading.addCell(cell4Date)
 
@@ -140,7 +148,6 @@ class ReportPDF : AppCompatActivity() {
 
     private fun getFile() : File {
         val extra = intent.getStringExtra("pictureDest")
-     //   var extra = "20200301_233135.png"
 
         val sd = Environment.getExternalStorageDirectory()
         val dest = File(sd, extra)
@@ -148,7 +155,24 @@ class ReportPDF : AppCompatActivity() {
         return dest
     }
 
+    fun getProject(key: String) : String? {
 
+        var x : projectsDTB? = projectsDTB()
+        var y : String? = ""
+
+        var  ref = FirebaseDatabase.getInstance().getReference("projects")
+        ref.addValueEventListener(object: ValueEventListener {
+            override fun onCancelled(p0: DatabaseError) {
+            }
+            override fun onDataChange(p0: DataSnapshot) {
+
+                val project = p0.child(key).getValue(projectsDTB::class.java)
+                x = project
+                 y = x?.name
+            }
+        })
+        return y
+    }
 
     override fun onRequestPermissionsResult(
         requestCode: Int,
@@ -165,8 +189,6 @@ class ReportPDF : AppCompatActivity() {
             }
         }
     }
-
-
 
     internal inner class ImageEvent(protected var img: Image) : PdfPCellEvent {
         override fun cellLayout(

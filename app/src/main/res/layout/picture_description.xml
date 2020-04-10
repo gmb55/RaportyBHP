@@ -33,6 +33,8 @@
         android:hint="Type description"
         android:inputType="textPersonName"
         android:text=""
+        android:textColor="#F1ECEC"
+        android:textColorHint="#EDEBEB"
         app:layout_constraintTop_toBottomOf="@+id/dspBTN"
         tools:layout_editor_absoluteX="16dp" />
 
