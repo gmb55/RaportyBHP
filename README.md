@@ -9,3 +9,4 @@
 Libraries that I use: 
 1. Fotoapparat for taking pictures. 
 2. iText5 for PDF creating. 
+3. Firebase - Realtime Database for storing informations. 
